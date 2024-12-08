@@ -1,16 +1,16 @@
 package main
 
 import (
-	"bufio"
 	"log"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/Rash419/AOC/input"
 )
 
 func main() {
-	lines, err := readFileByLine("input.txt")
+	lines, err := input.ReadFileByLine("input.txt")
 	if err != nil {
 		log.Fatalf("Failed to read input.txt with error[%s]", err.Error())
 	}
@@ -72,21 +72,4 @@ func findDistance(locationList1, locationList2 []int) {
 	}
 
 	log.Printf("Distance: %d", distance)
-}
-
-func readFileByLine(filePath string) ([]string, error) {
-	lines := make([]string, 0)
-	inputFile, err := os.Open(filePath)
-	if err != nil {
-		return lines, err
-	}
-
-	defer inputFile.Close()
-
-	scanner := bufio.NewScanner(inputFile)
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-	return lines, nil
 }
