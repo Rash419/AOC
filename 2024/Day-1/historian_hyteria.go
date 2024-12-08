@@ -18,7 +18,6 @@ func main() {
 	locationList1 := make([]int, len(lines))
 	locationList2 := make([]int, len(lines))
 
-
 	for i, line := range lines {
 		splitLine := strings.Split(line, "   ")
 		if len(splitLine) != 2 {
@@ -37,6 +36,29 @@ func main() {
 		locationList2[i] = location2
 	}
 
+	findDistance(locationList1, locationList2)
+  findSimilarityScore(locationList1, locationList2)
+}
+
+// soltion for part-2
+func findSimilarityScore(locationList1, locationList2 []int) {
+	locationList2Map := make(map[int]int)
+	for _, location := range locationList2 {
+		locationList2Map[location]++
+	}
+
+	similarityScore := 0
+	for _, location := range locationList1 {
+    if val, exist := locationList2Map[location]; exist {
+		  similarityScore += location * val
+    }
+	}
+
+	log.Printf("SimilarityScore: %d", similarityScore)
+}
+
+// solution for part-1
+func findDistance(locationList1, locationList2 []int) {
 	sort.Ints(locationList1)
 	sort.Ints(locationList2)
 
